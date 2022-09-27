@@ -2,10 +2,12 @@ const Express=require('express');
 const app= Express();
 require('../database/db');
 
-const routes=require('../router/user-routes');
+const userRoutes=require('../router/user-router');
+const blogRoutes=require('../router/blog-router');
 
 app.use(Express.json());
-app.use(routes);
+app.use(userRoutes);
+app.use(blogRoutes);
 
 app.listen(8000,()=>{
     console.log('server running');

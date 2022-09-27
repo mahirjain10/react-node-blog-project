@@ -14,9 +14,33 @@ const UserSchema=new mongoose.Schema({
         type:String,
         required:true,
         minlength:6
-    }
+    },
+    blogs:[{
+        type:mongoose.Types.ObjectId,
+        required:true,
+        ref:"BlogSchema"
+    }]
 })
 
+const BlogSchema=mongoose.Schema({
+    title:{
+        type:String,
+        required:true
+    },
+    description:{
+        type:String,
+        required:true
+    },
+    image:{
+        type:String,
+        required:true
+    },
+    user:{
+        type:mongoose.Types.ObjectId,
+        required:true,
+        ref:"UserSchema"
+    }
+})
 
 UserSchema.pre('save',async function(next){
     const user=this
@@ -26,4 +50,6 @@ UserSchema.pre('save',async function(next){
     next();
 })
 const UserSchemaModel=mongoose.model('User',UserSchema);
+const BlogSchemaModel=mongoose.model('Blog',BlogSchema);
 module.exports=UserSchemaModel;
+module.exports=BlogSchemaModel;
